@@ -11,7 +11,7 @@ rails 4.2.0
 MySQL
 
 
-## Setup
+## How to Setup Application
 
 * mkdir project
 * cd project
