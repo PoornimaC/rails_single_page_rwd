@@ -1,0 +1,35 @@
+<div>
+  <div class="sub-page-delimiter first-page" data-page="<%= params[:subpage] || 1 %>"></div>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>
+          Subordinates of <%= @subordinates.first.manager.name %>
+        </h4>
+      </div>
+
+      <table class="table table-fixed">
+        <thead>
+          <tr>
+            <th class="col-xs-4">Name</th>
+            <th class="col-xs-6">Department</th>
+            <th class="col-xs-2">Manager</th>
+          </tr>
+        </thead>
+
+        <tbody id="my-subordinates">
+          <% @subordinates.each do |subordinate| %>
+            <%= render "subordinate", subordinate: subordinate  %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <% if @subordinates.next_page %>
+    <div id="sub-infinite-scrolling">
+      <%= will_paginate @subordinates, :param_name => 'subpage' %>
+    </div>
+  <% end %>
+
+</div>

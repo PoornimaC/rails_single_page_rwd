@@ -1,0 +1,55 @@
+<div class="page-header">
+  <h4>Single Page Responsive Website</h4>
+</div>
+
+<div>
+  <div class="page-delimiter first-page" data-page="<%= params[:page] || 1 %>"></div>
+  <div class="align-div">
+    <%= form_tag(employees_path, :method => "get") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Manager" %>
+      <%= submit_tag "Search", class: 'btn btn-default' %>
+    <% end %>
+  </div>
+
+  <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>
+            Manager-Employees List
+          </h4>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-fixed">
+            <thead>
+              <tr>
+                <th class="col-xs-4">Name</th>
+                <th class="col-xs-6">Department</th>
+                <th class="col-xs-2">Sub Count</th>
+              </tr>
+            </thead>
+
+            <tbody id="my-employees">
+              <%= render @employees %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+
+  <% if @employees.next_page %>
+    <div id="infinite-scrolling">
+      <%= will_paginate @employees %>
+    </div>
+  <% end %>
+
+</div>
+
+
+<%= render :partial => "subordinates" %>
+
+<div class="align-div">
+  <h4><%= link_to 'Download Employees', export_employees_url(:format => :csv ) %></h4>
+</div>
+
+
+

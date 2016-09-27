@@ -1,0 +1,20 @@
+var delimiter =
+        $('<div class="page-delimiter" data-page="<%= params[:page] %>"></div>');
+$('#my-employees').append(delimiter);
+$('#my-employees').append('<%= j render @employees %>');
+$('#infinite-scrolling .pagination').replaceWith('<%= j will_paginate @employees %>');
+preparePagination(delimiter);
+<% unless @employees.next_page %>
+$('#infinite-scrolling .pagination').remove();
+<% end %>
+
+var subDelimiter =
+        $('<div class="sub-page-delimiter" data-page="<%= params[:sub_page] %>"></div>');
+$('#my-subordinates').append(subDelimiter);
+$('#my-subordinates').append('<%= j render "load_more_subordinates", subordinates: @subordinates %>');
+$('#sub-infinite-scrolling .pagination').replaceWith('<%= j will_paginate @subordinates, :param_name => "subpage" %>');
+preparePagination(subDelimiter);
+<% unless @subordinates.next_page %>
+$('#sub-infinite-scrolling .pagination').remove();
+<% end %>
+
