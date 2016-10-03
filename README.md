@@ -18,4 +18,4 @@ MySQL
 * git clone git@github.com:PoornimaC/rails_single_page_rwd.git
 * cd rails_single_page_rwd
 * bundle install
-* rake db:setup
+* bundle exec rake db:setup
